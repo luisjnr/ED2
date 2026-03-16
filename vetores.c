@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 
+#define N 10
+
 void gerarValores(int vetor[], int t){
 	if(!t)
 		return;
@@ -50,19 +52,31 @@ int buscaLinear(int vetor[], int t, int alvo){
 	return buscaLinear(vetor, t-1, alvo);
 }
 
+int buscaBinaria(int vetor[], int inicio, int fim, int alvo){
+	int flag = (inicio + fim) / 2;
+	if(vetor[flag] == alvo)
+		return flag;
+	if(inicio >= fim)
+		return -1;
+	if(alvo > vetor[flag])	
+		return buscaBinaria(vetor, flag + 1, fim, alvo);
+	return buscaBinaria(vetor, inicio, flag - 1, alvo);
+}
+
 int main(){
 	srand(time(NULL));
-	int vetor[10];
-	gerarValores(vetor, 10);
-	ordenarValores(vetor,10);
-	printarValores(vetor, 10);
-	printf("Maior valor: %d\n", maiorValor(vetor, 10));
-	printf("Soma dos valores: %d\n", somaVetor(vetor, 10));
+	int vetor[N];
+	gerarValores(vetor, N);
+	ordenarValores(vetor,N);
+	printarValores(vetor, N);
+	printf("Maior valor: %d\n", maiorValor(vetor, N));
+	printf("Soma dos valores: %d\n", somaVetor(vetor, N));
 	int alvo;
 	printf("Digite um número: ");
 	scanf(" %d", &alvo);
 	printf("Posição do número usando busca linear: %d\n", 
-	buscaLinear(vetor, 10, alvo));
+	buscaLinear(vetor, N, alvo));
+	printf("Posição do número usando busca binária: %d\n", buscaBinaria(vetor, 0, N, alvo));
 	return 0;
 }
 
