@@ -11,32 +11,27 @@ int interface(){
 	return opc;
 }
 
+void processamento(char frase[], char sis[]){
+	printf("%s", frase);
+	system(sis);
+}
+
 void kernel(){
-	printf("Aguarde...\n");
-	system("sleep 2");
+	processamento("Aguarde...\n", "sleep 2");
 	system("clear");
-	printf("System call iniciada...\n");
-	system("sleep 2");
+	processamento("System call iniciada...\n", "sleep 2");
 	system("clear");
-	printf("Salvando contexto...\n");
-	system("sleep 2");
+	processamento("Salvando contexto...\n", "sleep 2");
 	system("clear");
-	printf("Alterando para modo kernel...\n");
-	system("sleep 2");
+	processamento("Alterando para modo kernel...\n", "sleep 2");
 	system("clear");
-	printf("===== MODO KERNEL =====\n\n");
-	system("sleep 1");
-	printf("Realizando rotinas...\n");
-	system("sleep 1");
-	printf("Rotinas finalizadas.\n");
-	system("sleep 1");
+	processamento("===== MODO KERNEL =====\n\n", "sleep 1");
+	processamento("Realizando rotinas...\n", "sleep 1");
+	processamento("Rotinas finalizadas.\n", "sleep 1");
+	processamento("Alterando para modo usuário...\n", "sleep 2");
 	system("clear");
-	printf("Alterando para modo usuário...\n");
-	system("sleep 2");
-	printf("===== MODO USUÁRIO =====\n\n");
-	system("sleep 1");
-	printf("Restaurando contextos...\n");
-	system("sleep 1");
+	processamento("===== MODO USUÁRIO =====\n\n", "sleep 1");
+	processamento("Restaurando contextos...\n", "sleep 1");
 	system("clear");
 }
 
@@ -58,16 +53,15 @@ void jogoMatematico(){
 		int n2 = 1 + rand() % 100;
 		int resp;
 		printf("%d/10\n", i + 1);
-		printf("Quanto é %d + %d ? \n", n1, n2);
+		printf("Quanto é %d + %d ?\n", n1, n2);
 		system("sleep 1");
 		if(primo(n1) || primo(n2)){
 			system("clear");
 			kernel();
 			printf("===== MODO USUÁRIO =====\n\n");
 			printf("%d/10\n", i + 1);
-			printf("Quanto é %d + %d ? ", n1, n2);
+			printf("Quanto é %d + %d ?\n", n1, n2);
 		}
-		while(getchar() != '\n');
 		scanf(" %d", &resp);
 		system("clear");
 		resp == (n1 + n2) ? cont++ : cont;
