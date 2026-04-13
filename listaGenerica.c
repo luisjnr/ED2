@@ -14,7 +14,7 @@ int interface(){
 	return opc;
 }
 
-Body* cadastrarDocument(Body* list){
+Body* cadastrarDocument(Body* list, int flag){
 	char nome[1000];
 	int paginas, tamanho;
 	printf("===== NEW ARQUIVO =====\n\n" 
@@ -22,7 +22,7 @@ Body* cadastrarDocument(Body* list){
 	scanf(" %[^\n]s", nome);
 	paginas = 1 + rand() % 50;
 	tamanho = 100 + rand() % 900;
-	return new_Document(list, nome, paginas, tamanho);
+	return new_Document(list, nome, paginas, tamanho, flag);
 }
 
 int main(){
@@ -32,16 +32,17 @@ int main(){
 	list->tail = NULL;
 	do{
 		switch (interface()){
-			case 1: list = cadastrarDocument(list); 
+			case 1: list = cadastrarDocument(list, 0);
+				printf("head %s		tail %s\n\n", list->head->nome, list->tail->nome);
 				break;
 				
-			case 2:
+			case 2: list = cadastrarDocument(list, 1);
+				printf("head %s		tail %s\n\n", list->head->nome, list->tail->nome);
+				break;
+			case 3: listar_Documents(list, 0); 
 				break;
 				
-			case 3: listar_Documents(list->head); 
-				break;
-				
-			case 4:
+			case 4: list = listar_Documents(list, 1);
 				break;
 				
 			case 5:
