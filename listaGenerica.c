@@ -14,7 +14,7 @@ int interface(){
 	return opc;
 }
 
-Body* cadastrarDocument(Body* list, int flag){
+Body cadastrarDocument(Body list, int flag){
 	char nome[1000];
 	int paginas, tamanho;
 	printf("===== NEW ARQUIVO =====\n\n" 
@@ -27,26 +27,27 @@ Body* cadastrarDocument(Body* list, int flag){
 
 int main(){
 	srand(time(NULL));
-	Body* list;
-	list->head = NULL;
-	list->tail = NULL;
+	Body list = new_List();
 	do{
 		switch (interface()){
 			case 1: list = cadastrarDocument(list, 0);
-				printf("head %s		tail %s\n\n", list->head->nome, list->tail->nome);
+				alert("Adição concluída!\n");
 				break;
 				
 			case 2: list = cadastrarDocument(list, 1);
-				printf("head %s		tail %s\n\n", list->head->nome, list->tail->nome);
+				alert("Adição concluída!\n");
 				break;
+				
 			case 3: listar_Documents(list, 0); 
 				break;
 				
 			case 4: list = listar_Documents(list, 1);
 				break;
 				
-			case 5:
+			case 5: list = deletar_Documents(list);
+				alert("Exclusão concluída!\n");
 				break;
+				
 			default: alert("Erro!\nOpção não existe.\nTente novamente...\n\n");
 		}
 	} while (1);
