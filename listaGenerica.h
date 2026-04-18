@@ -24,7 +24,7 @@ void alert(char frase[]){
 }
 
 Body new_List(){
-	Body list = malloc(sizeof(Body));
+	Body list = malloc(sizeof(TypeBody));
 	list->head = NULL;
 	list->tail = NULL;
 	return list;

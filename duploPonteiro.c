@@ -2,19 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "listaGenerica.h"
+#include "duploPonteiro.h"
 
 int interface(){
 	int opc;
-	printf("1 - Adicionar Arquivo\n" "2 - Adicionar Arquivo Prioritário\n"
-	"3 - Listar Arquivos\n" "4 - Listar Primeiro Arquivo da Fila\n" "5 - Excluir Arquivo\n");
+	printf("1 - Adicionar Arquivo\n" "2 - Fila de Impressão\n"
+	"3 - Imprimir\n" "4 - Excluir da Fila\n" "5 - Mudar Prioridade\n");
 	scanf(" %d", &opc);
 	while(getchar() != '\n');
 	system("clear");
 	return opc;
 }
 
-Body cadastrarDocument(Body list, int flag){
+Body cadastrarDocument(Body list){
 	char nome[1000];
 	int paginas, tamanho;
 	printf("===== NEW ARQUIVO =====\n\n" 
@@ -22,7 +22,7 @@ Body cadastrarDocument(Body list, int flag){
 	scanf(" %[^\n]s", nome);
 	paginas = 1 + rand() % 50;
 	tamanho = 100 + rand() % 900;
-	return new_Document(list, nome, paginas, tamanho, flag);
+	return new_Document(list, nome, paginas, tamanho);
 }
 
 int main(){
@@ -30,22 +30,20 @@ int main(){
 	Body list = new_List();
 	do{
 		switch (interface()){
-			case 1: list = cadastrarDocument(list, 0);
+			case 1: list = cadastrarDocument(list);
 				alert("Adição concluída!\n");
 				break;
 				
-			case 2: list = cadastrarDocument(list, 1);
-				alert("Adição concluída!\n");
+			case 2: lista_Document(list);
 				break;
 				
-			case 3: listar_Documents(list, 0); 
+			case 3: list = imprimir_Document(list);
 				break;
 				
-			case 4: list = listar_Documents(list, 1);
+			case 4: list = deletar_Document(list); 
 				break;
 				
-			case 5: list = deletar_Documents(list);
-				alert("Exclusão concluída!\n");
+			case 5: list = priorizar_Document(list);
 				break;
 				
 			default: alert("Erro!\nOpção não existe.\nTente novamente...\n\n");
