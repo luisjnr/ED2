@@ -9,7 +9,7 @@ int interface(){
 	printf("1 - Adicionar Arquivo\n"
 		   "2 - Adicionar Arquivo Prioritário\n"
 		   "3 - Listar Arquivos\n"
-		   "4 - Listar Primeiro Arquivo da Fila\n"
+		   "4 - Imprimir Arquivo\n"
 		   "5 - Excluir Arquivo\n");
 	scanf(" %d", &opc);
 	while (getchar() != '\n')
@@ -18,7 +18,7 @@ int interface(){
 	return opc;
 }
 
-Body cadastrarDocument(Body list, int flag){
+void cadastrarDocument(Body list, int flag){
 	char nome[1000];
 	int paginas, tamanho;
 	printf("===== NEW ARQUIVO =====\n\n"
@@ -26,7 +26,7 @@ Body cadastrarDocument(Body list, int flag){
 	scanf(" %[^\n]s", nome);
 	paginas = 1 + rand() % 50;
 	tamanho = 100 + rand() % 900;
-	return new_Document(list, nome, paginas, tamanho, flag);
+	new_Document(list, nome, paginas, tamanho, flag);
 }
 
 int main(){
@@ -35,12 +35,12 @@ int main(){
 	do{
 		switch (interface()){
 		case 1:
-			list = cadastrarDocument(list, 0);
+			cadastrarDocument(list, 0);
 			alert("Adição concluída!\n");
 			break;
 
 		case 2:
-			list = cadastrarDocument(list, 1);
+			cadastrarDocument(list, 1);
 			alert("Adição concluída!\n");
 			break;
 
@@ -49,12 +49,11 @@ int main(){
 			break;
 
 		case 4:
-			list = listar_Documents(list, 1);
+			listar_Documents(list, 1);
 			break;
 
 		case 5:
-			list = deletar_Documents(list);
-			alert("Exclusão concluída!\n");
+			deletar_Documents(list);
 			break;
 
 		default:

@@ -30,7 +30,7 @@ Body new_List(){
 	return list;
 }
 
-Body new_Document(Body list, char nome[], int paginas, int tamanho, int flag){
+void new_Document(Body list, char nome[], int paginas, int tamanho, int flag){
 	Document novo = malloc(sizeof(Document));
 	novo->nome = malloc(strlen(nome));
 	strcpy(novo->nome, nome);
@@ -42,29 +42,29 @@ Body new_Document(Body list, char nome[], int paginas, int tamanho, int flag){
 		novo->next = NULL;
 		if(!list->tail){
 			list->tail = novo;
-			return list;
+			return;
 		}
 		list->tail->next = novo;
 		list->tail = novo;
-		return list;
+		return;
 	}
 	else{
 		if(!list->tail){
 			novo->next = NULL;
 			list->tail = novo;
 			list->head = novo;
-			return list;
+			return;
 		}
 		novo->next = list->head;
 		list->head = novo;
-		return list;
+		return;
 	}
 }
 
-Body listar_Documents(Body list, int flag){
+void listar_Documents(Body list, int flag){
 	if(!list->head){
 		alert("Erro!\nNenhum arquivo foi cadastrado.\nTente novamente...\n");
-		return list;
+		return;
 	}
 	if(!flag){
 		Document head = list->head;
@@ -86,9 +86,9 @@ Body listar_Documents(Body list, int flag){
 		free(temp);
 		if(!list->head)
 			list->tail = NULL;
-		return list;
+		return;
 	}
-	return list;
+	return;
 }
 
 void selecionarAlvo(Body list, char alvo[]){
@@ -113,10 +113,10 @@ void selecionarAlvo(Body list, char alvo[]){
 	} while (1);
 }
 
-Body deletar_Documents(Body list){
+void deletar_Documents(Body list){
 	if(!list->head){
 		alert("Erro!\nNenhum arquivo foi cadastrado.\n\n");
-		return list;
+		return;
 	}
 	char alvo[1000];
 	selecionarAlvo(list, alvo);
@@ -126,25 +126,26 @@ Body deletar_Documents(Body list){
 		free(temp);
 		if(!list->head)
 			list->tail = NULL;
-		return list;
+		alert("Exclusão concluída!\n");
+		return;
 	}
 	Document head = list->head;
-	while(list->head){
-		if(!strcmp(list->head->next->nome, alvo)){
-			Document temp = list->head->next;
+	while(head){
+		if(!strcmp(head->next->nome, alvo)){
+			Document temp = head->next;
 			if(!strcmp(list->tail->nome, alvo)){
 				list->tail = list->head;
 				list->tail->next = NULL;
 				free(temp);
-				list->head = head;
-				return list;
+				alert("Exclusão concluída!\n");
+				return;
 			}
-			list->head->next = temp->next;
-			list->head = head;
+			head->next = temp->next;
 			free(temp);
-			return list;
+			alert("Exclusão concluída!\n");
+			return;
 		}
-		list->head = list->head->next;
+		head = head->next;
 	}
-	return list;
+	return;
 }
