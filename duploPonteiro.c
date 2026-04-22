@@ -14,7 +14,7 @@ int interface(){
 	return opc;
 }
 
-Body cadastrarDocument(Body list){
+void cadastrarDocument(Body list){
 	char nome[1000];
 	int paginas, tamanho;
 	printf("===== NEW ARQUIVO =====\n\n" 
@@ -30,20 +30,20 @@ int main(){
 	Body list = new_List();
 	do{
 		switch (interface()){
-			case 1: list = cadastrarDocument(list);
+			case 1: cadastrarDocument(list);
 				alert("Adição concluída!\n");
 				break;
 				
 			case 2: lista_Document(list);
 				break;
 				
-			case 3: list = imprimir_Document(list);
+			case 3: imprimir_Document(list);
 				break;
 				
-			case 4: list = deletar_Document(list); 
+			case 4: deletar_Document(list); 
 				break;
 				
-			case 5: list = priorizar_Document(list);
+			case 5: priorizar_Document(list);
 				break;
 				
 			default: alert("Erro!\nOpção não existe.\nTente novamente...\n\n");

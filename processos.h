@@ -35,7 +35,7 @@ Body new_Body(){
 	return new;
 }
 
-Body new_Process(Body list, int flag){
+void new_Process(Body list, int flag){
 	if(!flag){
 		Process new = malloc(sizeof(TypeProcess));
 		new->type = malloc(strlen("Kernel")+1);
@@ -52,7 +52,7 @@ Body new_Process(Body list, int flag){
 			list->current = new;
 			list->size++;
 			list->sizePID++;
-			return list;
+			return;
 		}
 		if(!list->lastKernel){
 			new->next = list->head;
@@ -63,7 +63,7 @@ Body new_Process(Body list, int flag){
 			list->current= new;
 			list->size++;
 			list->sizePID++;
-			return list;
+			return;
 		}
 		if(list->lastKernel->pid == list->tail->pid){
 			list->tail->next = new;
@@ -74,7 +74,7 @@ Body new_Process(Body list, int flag){
 			list->current = new;
 			list->size++;
 			list->sizePID++;
-			return list;
+			return;
 		}
 		new->next = list->lastKernel->next;
 		new->previous = list->lastKernel;
@@ -84,7 +84,7 @@ Body new_Process(Body list, int flag){
 		list->current = new;
 		list->size++;
 		list->sizePID++;
-		return list;
+		return;
 	}
 	else{
 		Process new = malloc(sizeof(TypeProcess));
@@ -101,7 +101,7 @@ Body new_Process(Body list, int flag){
 			list->current = new;
 			list->size++;
 			list->sizePID++;
-			return list;
+			return;
 		}
 		new->next = NULL;
 		new->previous = list->tail;
@@ -110,14 +110,14 @@ Body new_Process(Body list, int flag){
 		list->current = new;
 		list->size++;
 		list->sizePID++;
-		return list;
+		return;
 	}
-	return NULL;
+	return;
 }
 
-Body delete_Process(Body list){
+void delete_Process(Body list){
 	if(!list->head)	
-		return list;
+		return;
 	if(list->head == list->tail){
 		free(list->head);
 		list->current = NULL;
@@ -125,7 +125,7 @@ Body delete_Process(Body list){
 		list->lastKernel = NULL;
 		list->tail = NULL;
 		list->size--;
-		return list;
+		return;
 	}
 	
 	if(list->current == list->head){
@@ -137,7 +137,7 @@ Body delete_Process(Body list){
 		free(temp);
 		list->size--;
 		list->current = list->tail;
-		return list;
+		return;
 	}
 	
 	if(list->current == list->tail){
@@ -149,7 +149,7 @@ Body delete_Process(Body list){
 		free(temp);
 		list->size--;
 		list->current = list->tail;
-		return list;
+		return;
 	}
 	
 	if(list->current == list->lastKernel){
@@ -160,7 +160,7 @@ Body delete_Process(Body list){
 		list->current = temp->previous;
 		free(temp);
 		list->size--;
-		return list;
+		return;
 	}
 	Process temp = list->current;
 	list->current->next->previous = temp->previous;
@@ -168,5 +168,5 @@ Body delete_Process(Body list){
 	list->current = temp->previous;
 	free(temp);
 	list->size--;
-	return list;
+	return;
 }

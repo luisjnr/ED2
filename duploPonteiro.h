@@ -30,7 +30,7 @@ Body new_List(){
 	return list;
 }
 
-Body new_Document(Body list, char nome[], int paginas, int tamanho){
+void new_Document(Body list, char nome[], int paginas, int tamanho){
 	Document novo = malloc(sizeof(TypeDocument));
 	novo->nome = malloc(strlen(nome)+1);
 	strcpy(novo->nome, nome);
@@ -41,12 +41,12 @@ Body new_Document(Body list, char nome[], int paginas, int tamanho){
 		novo->prior = NULL;
 		list->head = novo;
 		list->tail = novo;
-		return list;
+		return;
 	}
 	novo->prior = list->tail;
 	list->tail->next = novo;
 	list->tail = novo;
-	return list;
+	return;
 }
 
 void lista_Document(Body list){
@@ -63,10 +63,10 @@ void lista_Document(Body list){
 	}
 }
 
-Body imprimir_Document(Body list){
+void imprimir_Document(Body list){
 	if(!list->head){
 		alert("Erro!\nNenhum arquivo foi cadastrado.\n\n");
-		return list;
+		return;
 	}	
 	printf("===== Impressão =====\n\n");
 	printf("Nome: %s\n" "Páginas: %d\n" 
@@ -76,10 +76,10 @@ Body imprimir_Document(Body list){
 	free(temp);
 	if(!list->head){
 		list->tail = NULL;
-		return list;
+		return;
 	}
 	list->head->prior = NULL;
-	return list;	
+	return;	
 }
 
 void selecionarAlvo(Body list, char alvo[], char frase[]){
@@ -98,26 +98,26 @@ void selecionarAlvo(Body list, char alvo[], char frase[]){
 	} while (1);
 }
 
-Body deletar_Document(Body list){
+void deletar_Document(Body list){
 	if(!list->head){
 		alert("Erro!\nNenhum arquivo foi cadastrado.\n\n");
-		return list;
+		return;
 	}
 	char alvo[1000];
 	selecionarAlvo(list, alvo, "Nome do arquivo à ser excluido: ");
-	if(!strcmp(list->head->nome, list->tail->nome)){
+	if(list->head == list->tail){
 		free(list->head);
 		list->head = NULL;
 		list->tail = NULL;
 		alert("Exclusão concluída!\n");
-		return list;
+		return;
 	}
 	if(!strcmp(list->head->nome, alvo)){
 		list->head = list->head->next;
 		free(list->head->prior);
 		list->head->prior = NULL;
 		alert("Exclusão concluída!\n");
-		return list;
+		return;
 	}
 	if(!strcmp(list->tail->nome, alvo)){
 		Document temp = list->tail;
@@ -125,7 +125,7 @@ Body deletar_Document(Body list){
 		list->tail->next = NULL;
 		free(temp);
 		alert("Exclusão concluída!\n");
-		return list;
+		return;
 	}
 	Document head = list->head;
 	while(list->head){
@@ -136,23 +136,23 @@ Body deletar_Document(Body list){
 			list->head = head;
 			free(temp);
 			alert("Exclusão concluída!\n");
-			return list;
+			return;
 		}
 		list->head = list->head->next;
 	}
-	return NULL;
+	return;
 }
 
-Body priorizar_Document(Body list){
+void priorizar_Document(Body list){
 	if(!list->head){
 		alert("Erro!\nNenhum arquivo foi cadastrado.\n\n");
-		return list;
+		return;
 	}
 	char alvo[1000];
 	selecionarAlvo(list, alvo, "Nome do arquivo à ser priorizado: ");
 	if(!strcmp(list->head->nome, alvo)){
 		alert("Erro!\nArquivo selecionado já está priorizado.\n\n");
-		return list;
+		return;
 	}	
 	if(!strcmp(list->tail->nome, alvo)){
 		Document temp = list->tail;
@@ -162,7 +162,7 @@ Body priorizar_Document(Body list){
 		list->head->prior = temp;
 		temp->prior = NULL;
 		list->head = temp;
-		return list;
+		return;
 	}
 	Document head = list->head;
 	while(list->head){
@@ -171,13 +171,12 @@ Body priorizar_Document(Body list){
 			list->head->prior->next = temp->next;
 			list->head->next->prior = temp->prior;
 			temp->prior = NULL;
-			list->head = head;
-			temp->next = list->head;
-			list->head->prior = temp;
+			temp->next = head;
+			head->prior = temp;
 			list->head = temp;
-			return list;
+			return;
 		}
 		list->head = list->head->next;
 	}
-	return NULL;
+	return;
 }

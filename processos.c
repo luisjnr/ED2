@@ -32,7 +32,7 @@ int main(){
 			if(list->current){
 				list->current->done++;
 				if(list->current->instructions == list->current->done)
-					list = delete_Process(list);
+					delete_Process(list);
 			}
 			if(list->current == list->tail)
 				list->current = list->head;
@@ -42,17 +42,17 @@ int main(){
 			system("clear");
 		}
 		if(opc == 'k' || opc == 'K')
-			list = new_Process(list, 0);
+			new_Process(list, 0);
 		
 		if(opc == 'u' || opc == 'U')
-			list = new_Process(list, 1);
+			new_Process(list, 1);
 		
 		if(opc == 'd' || opc == 'D'){
 			if(list->current == list->head)
 				list->current = list->tail;
 			else 
 				list->current = list->current->previous;
-			list = delete_Process(list);
+			delete_Process(list);
 		}
 		
 		if(opc == 'e' || opc == 'E'){
