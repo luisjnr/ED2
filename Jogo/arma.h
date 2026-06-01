@@ -12,10 +12,15 @@ typedef struct _Arma{
 
 typedef _Arma* Arma;
 
+void setArma();
+void printArma();
+
 Object new_Arma(){
 	Object novo = new(Object);
 	novo->type = ARMA;
 	novo->item = malloc(sizeof(_Arma));
+	novo->set = setArma;
+	novo->print = printArma;
 	return novo;
 }
 
@@ -29,6 +34,7 @@ void setArma(Object self, int dano, int id, Equipamento equipamento){
 void printArma(Object self){
 	Arma arma = self->item;
 	if(self->type != ARMA) return;
+	printf("====== Arma ======\n");
 	if(!arma->equipamento)
 		printf("Arco\n");
 	if(arma->equipamento == 1)

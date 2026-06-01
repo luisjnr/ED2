@@ -21,10 +21,17 @@ typedef struct BonusPlayer{
 
 typedef BonusPlayer* Pbonus;
 
+void setPlayer();
+void playerBonus();
+void printPlayer();
+void set_Pbonus();
+
 Object new_Player(){
 	Object novo = new(Object);
 	novo->type = PLAYER;
 	novo->item = malloc(sizeof(_Player));
+	novo->print = printPlayer;
+	novo->set = setPlayer;
 	return novo;
 }
 
@@ -41,6 +48,7 @@ Object new_Pbonus(){
 	Object novo = new(Object);
 	novo->type = PLAYER;
 	novo->item = malloc(sizeof(BonusPlayer));
+	novo->set = set_Pbonus;
 	return novo;
 }
 
@@ -53,7 +61,7 @@ void set_Pbonus(Object self, int bonus, Raca raca){
 void printPlayer(Object self){
 	if(self->type != PLAYER) return;
 	Player player = self->item;
-	printf("Nome: %s\n" "ID: %d\n" "HP: %d\n"
+	printf("====== Player ======\n" "Nome: %s\n" "ID: %d\n" "HP: %d\n"
 	, player->nome, player->id, player->hp);
 	if(!player->raca)
 		printf("Raça: Humano\n\n");

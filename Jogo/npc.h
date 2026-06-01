@@ -12,10 +12,15 @@ typedef struct _Npc{
 
 typedef _Npc* Npc;
 
+void setNpc();
+void printNpc();
+
 Object new_Npc(){
 	Object novo = new(Object);
 	novo->type = NPC;
 	novo->item = malloc(sizeof(_Npc));
+	novo->set = setNpc;
+	novo->print = printNpc;
 	return novo;
 }
 
@@ -29,6 +34,7 @@ void setNpc(Object self, int id, int hp, Tipo tipo){
 void printNpc(Object self){
 	if(self->type != NPC) return;
 	Npc npc = self->item;
+	printf("====== Npc ======\n");
 	if(!npc->tipo)
 		printf("Raça: Dragão\n");
 	if(npc->tipo == 1)
