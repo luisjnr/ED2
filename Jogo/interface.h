@@ -70,14 +70,11 @@ void menuBonusPlayer(List list){
 	}	
 }
 
-void menuSet(List list){
-	Object novo;
-	switch (interface("1 - Excluir Item do Inicio\n2 - Excluir Item do Final\n3 - Excluir Item Selecionado\n")){
-		case 1: 
+void menuDelete(List list){
+	switch (interface("1 - Excluir Item Selecionado\n2 - Excluir Lista\n")){
+		case 1: list->del(list, 0);
 			break;
-		case 2:
-			break;
-		case 3: 
+		case 2: list->clear(list);
 			break;
 		default: printf("Erro!\nTente Novamente...\n");
 	}
@@ -85,14 +82,14 @@ void menuSet(List list){
 
 void menu(List list){
 	do{
-		switch (interface("1 - Set Item\n2 - Print Item\n3 - Set Bônus\n4 - Excluir Item")){
+		switch (interface("1 - Set Item\n2 - Print Item\n3 - Set Bônus\n4 - Excluir Item\n")){
 			case 1: menuSet(list);
 				break;
 			case 2: menuPrint(list);
 				break;
 			case 3: menuBonusPlayer(list);
 				break;
-			case 4: menuExclusão(list);
+			case 4: menuDelete(list);
 				break;
 			default: printf("Erro!\nTente Novamente...\n");
 		}

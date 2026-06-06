@@ -30,7 +30,6 @@ Object new_Object(){
 void print_object(Object self) {
     if(self)
 		self->print(self);
-	return;
 }
 
 void destroy(Object objeto){

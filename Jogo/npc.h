@@ -41,6 +41,6 @@ void printNpc(Object self){
 		printf("Raça: Monstro\n");
 	if(npc->tipo == 2)
 		printf("Raça: Demonio\n");
-	printf("ID: %d\n" "HP: %d\n\n"
+	printf("ID: %d\n" "HP: %d\n"
 	, npc->id, npc->hp);	
 }

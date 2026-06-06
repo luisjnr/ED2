@@ -64,13 +64,13 @@ void printPlayer(Object self){
 	printf("====== Player ======\n" "Nome: %s\n" "ID: %d\n" "HP: %d\n"
 	, player->nome, player->id, player->hp);
 	if(!player->raca)
-		printf("Raça: Humano\n\n");
+		printf("Raça: Humano\n");
 	if(player->raca == 1)
-		printf("Raça: Ogro\n\n");
+		printf("Raça: Ogro\n");
 	if(player->raca == 2)
-		printf("Raça: Elfo\n\n");
+		printf("Raça: Elfo\n");
 	if(player->raca == 3)
-		printf("Raça: Goblin\n\n");	
+		printf("Raça: Goblin\n");	
 }
 
 void playerBonus(Object self, Object info){

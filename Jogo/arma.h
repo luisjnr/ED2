@@ -41,6 +41,6 @@ void printArma(Object self){
 		printf("Espada\n");
 	if(arma->equipamento == 2)
 		printf("Lança\n");
-	printf("Dano: %d\n" "ID: %d\n\n", arma->dano, arma->id);
+	printf("Dano: %d\n" "ID: %d\n", arma->dano, arma->id);
 }
 
