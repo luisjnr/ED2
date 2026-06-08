@@ -31,7 +31,7 @@ void setNpc(Object self, int id, int hp, Tipo tipo){
 	novo->tipo = tipo;
 }
 
-void printNpc(Object self){
+void printNpc(Object self, int position){
 	if(self->type != NPC) return;
 	Npc npc = self->item;
 	printf("====== Npc ======\n");
@@ -43,4 +43,5 @@ void printNpc(Object self){
 		printf("Raça: Demonio\n");
 	printf("ID: %d\n" "HP: %d\n"
 	, npc->id, npc->hp);	
+	printf("Posição: %d\n\n", position);
 }

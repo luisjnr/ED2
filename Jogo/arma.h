@@ -31,7 +31,7 @@ void setArma(Object self, int dano, int id, Equipamento equipamento){
 	novo->id = id;
 }
 
-void printArma(Object self){
+void printArma(Object self, int position){
 	Arma arma = self->item;
 	if(self->type != ARMA) return;
 	printf("====== Arma ======\n");
@@ -42,5 +42,6 @@ void printArma(Object self){
 	if(arma->equipamento == 2)
 		printf("Lança\n");
 	printf("Dano: %d\n" "ID: %d\n", arma->dano, arma->id);
+	printf("Posição: %d\n\n", position);
 }
 

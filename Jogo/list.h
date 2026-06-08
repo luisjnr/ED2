@@ -70,12 +70,11 @@ void list_Push(List self, Object novo){
 void list_Print(List self, void (*print)()){
 	if(!self->head) return;
 	Object current = self->head;
-	int cont = 0;
+	int position = 0;
 	while(current){
-		print(current);
-		printf("Posição: %d\n\n", cont);
+		print(current, position);
 		current = current->next;
-		cont++;
+		position++;
 	}
 }
 

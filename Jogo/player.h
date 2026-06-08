@@ -58,7 +58,7 @@ void set_Pbonus(Object self, int bonus, Raca raca){
 	novo->raca = raca;
 }
 
-void printPlayer(Object self){
+void printPlayer(Object self, int position){
 	if(self->type != PLAYER) return;
 	Player player = self->item;
 	printf("====== Player ======\n" "Nome: %s\n" "ID: %d\n" "HP: %d\n"
@@ -71,6 +71,7 @@ void printPlayer(Object self){
 		printf("Raça: Elfo\n");
 	if(player->raca == 3)
 		printf("Raça: Goblin\n");	
+	printf("Posição: %d\n\n", position);
 }
 
 void playerBonus(Object self, Object info){
