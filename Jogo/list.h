@@ -1,4 +1,4 @@
-#define new(Type) new_##Type()
+#define new(TYPE,...) new_##TYPE(__VA_ARGS__)
 
 typedef struct _List{
 	Object head;

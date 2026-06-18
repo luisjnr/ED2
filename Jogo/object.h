@@ -1,12 +1,8 @@
-#define new(Type) new_##Type()
-
-typedef enum{
-	PLAYER, ARMA, NPC,
-}TypeNode;
+#define new(TYPE,...) new_##TYPE(__VA_ARGS__)
 
 typedef struct Node{
 	void* item;
-	TypeNode type;
+	int type;
 	struct Node* next;
 	struct Node* prev;
 	void (*set)();
@@ -23,7 +19,6 @@ Object new_Object(){
 	novo->next = NULL;
 	novo->prev = NULL;
 	novo->item = NULL;
-	novo->destroy = destroy;
 	return novo;
 }
 
@@ -31,11 +26,3 @@ void print_object(Object self) {
     if(self)
 		self->print(self);
 }
-
-void destroy(Object objeto){
-	free(objeto->item);
-	free(objeto);
-}
-
-
-

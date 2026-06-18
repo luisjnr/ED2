@@ -9,6 +9,10 @@
 #include "list.h"
 #include "interface.h"
 
+typedef enum{
+	PLAYER, ARMA, NPC,
+}TypeNode;
+
 int main(){
 	List list = new(List);
 	menu(list);

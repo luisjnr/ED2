@@ -1,4 +1,4 @@
-#define new(Type) new_##Type()
+#define new(TYPE,...) new_##TYPE(__VA_ARGS__)
 
 typedef enum{
 	HUMANO, OGRO, ELFO, GOBLIN,	
@@ -25,13 +25,16 @@ void setPlayer();
 void playerBonus();
 void printPlayer();
 void set_Pbonus();
+void destroyPlayer();
 
-Object new_Player(){
+Object new_Player(char* nome, int id, int hp, Raca raca){
 	Object novo = new(Object);
-	novo->type = PLAYER;
+	novo->type = 0;
 	novo->item = malloc(sizeof(_Player));
 	novo->print = printPlayer;
 	novo->set = setPlayer;
+	novo->destroy = destroyPlayer;
+	setPlayer(novo, nome, id, hp, raca);
 	return novo;
 }
 
@@ -44,11 +47,12 @@ void setPlayer(Object self, char* nome, int id, int hp, Raca raca){
 	strcpy(player->nome, nome);
 }
 
-Object new_Pbonus(){
+Object new_Pbonus(int bonus, Raca raca){
 	Object novo = new(Object);
-	novo->type = PLAYER;
+	novo->type = 0;
 	novo->item = malloc(sizeof(BonusPlayer));
 	novo->set = set_Pbonus;
+	set_Pbonus(novo, bonus, raca);
 	return novo;
 }
 
@@ -59,7 +63,7 @@ void set_Pbonus(Object self, int bonus, Raca raca){
 }
 
 void printPlayer(Object self, int position){
-	if(self->type != PLAYER) return;
+	if(self->type != 0) return;
 	Player player = self->item;
 	printf("====== Player ======\n" "Nome: %s\n" "ID: %d\n" "HP: %d\n"
 	, player->nome, player->id, player->hp);
@@ -79,4 +83,11 @@ void playerBonus(Object self, Object info){
 	contexto->player = self->item;	
 	if(contexto->player->raca != contexto->raca) return;
 	contexto->player->hp += contexto->bonus;
+}
+
+void destroyPlayer(Object objeto){
+	Player player = objeto->item;
+	free(player->nome);
+	free(objeto->item);
+	free(objeto);
 }

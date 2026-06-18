@@ -1,4 +1,4 @@
-#define new(Type) new_##Type()
+#define new(TYPE,...) new_##TYPE(__VA_ARGS__)
 
 typedef enum{
 	DRAGAO, MONSTRO, DEMONIO,
@@ -14,13 +14,16 @@ typedef _Npc* Npc;
 
 void setNpc();
 void printNpc();
+void destroyNpc();
 
-Object new_Npc(){
+Object new_Npc(int id, int hp, Tipo tipo){
 	Object novo = new(Object);
-	novo->type = NPC;
+	novo->type = 2;
 	novo->item = malloc(sizeof(_Npc));
 	novo->set = setNpc;
 	novo->print = printNpc;
+	novo->destroy = destroyNpc;
+	setNpc(novo, id, hp, tipo);
 	return novo;
 }
 
@@ -32,7 +35,7 @@ void setNpc(Object self, int id, int hp, Tipo tipo){
 }
 
 void printNpc(Object self, int position){
-	if(self->type != NPC) return;
+	if(self->type != 2) return;
 	Npc npc = self->item;
 	printf("====== Npc ======\n");
 	if(!npc->tipo)
@@ -44,4 +47,9 @@ void printNpc(Object self, int position){
 	printf("ID: %d\n" "HP: %d\n"
 	, npc->id, npc->hp);	
 	printf("Posição: %d\n\n", position);
+}
+
+void destroyNpc(Object objeto){
+	free(objeto->item);
+	free(objeto);
 }

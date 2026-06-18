@@ -1,4 +1,4 @@
-#define new(Type) new_##Type()
+#define new(TYPE,...) new_##TYPE(__VA_ARGS__)
 
 typedef enum{
 	ARCO, ESPADA, LANCA,
@@ -14,17 +14,20 @@ typedef _Arma* Arma;
 
 void setArma();
 void printArma();
+void destroyArma();
 
-Object new_Arma(){
+Object new_Arma(int id, int dano, Equipamento equipamento){
 	Object novo = new(Object);
-	novo->type = ARMA;
+	novo->type = 1;
 	novo->item = malloc(sizeof(_Arma));
 	novo->set = setArma;
 	novo->print = printArma;
+	novo->destroy = destroyArma;
+	setArma(novo, dano, id, equipamento);
 	return novo;
 }
 
-void setArma(Object self, int dano, int id, Equipamento equipamento){
+void setArma(Object self, int id, int dano, Equipamento equipamento){
 	Arma novo = self->item;
 	novo->dano = dano;
 	novo->equipamento = equipamento;
@@ -33,7 +36,7 @@ void setArma(Object self, int dano, int id, Equipamento equipamento){
 
 void printArma(Object self, int position){
 	Arma arma = self->item;
-	if(self->type != ARMA) return;
+	if(self->type != 1) return;
 	printf("====== Arma ======\n");
 	if(!arma->equipamento)
 		printf("Arco\n");
@@ -43,5 +46,10 @@ void printArma(Object self, int position){
 		printf("Lança\n");
 	printf("Dano: %d\n" "ID: %d\n", arma->dano, arma->id);
 	printf("Posição: %d\n\n", position);
+}
+
+void destroyArma(Object objeto){
+	free(objeto->item);
+	free(objeto);
 }
 

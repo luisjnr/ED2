@@ -1,4 +1,4 @@
-#define new(Type) new_##Type()
+#define new(TYPE,...) new_##TYPE(__VA_ARGS__)
 
 int interface(char frase[]){
 	int opc, verificar;
@@ -11,19 +11,12 @@ int interface(char frase[]){
 }
 
 void menuSet(List list){
-	Object novo;
 	switch (interface("1 - Novo Player\n2 - Nova Arma\n3 - Novo NPC\n")){
-		case 1: novo = new(Player);
-			novo->set(novo, "Luis Junior Lenda", 19, 100, ELFO);
-			list->enqueue(list, novo);
+		case 1: list->enqueue(list, new(Player, "Luis Junior Lenda", 19, 100, ELFO));
 			break;
-		case 2: novo = new(Arma);
-			novo->set(novo, 12, 19, ESPADA);
-			list->enqueue(list, novo);
+		case 2: list->enqueue(list, new(Npc, 10, 10000, DRAGAO));
 			break;
-		case 3: novo = new(Npc);
-			novo->set(novo, 19, 10000, DRAGAO);
-			list->enqueue(list, novo);
+		case 3: list->enqueue(list, new(Arma, 19, 22, ESPADA));
 			break;
 		default: printf("Erro!\nTente Novamente...\n");
 	}
@@ -44,27 +37,14 @@ void menuPrint(List list){
 }
 
 void menuBonusPlayer(List list){
-	Object novo;
 	switch (interface("1 - Humano\n2 - Ogro\n3 - Elfo\n4 - Goblin\n")){
-		case 1: novo = new(Pbonus);
-			novo->set(novo, 100, HUMANO);
-			list->bonus(list, novo, playerBonus);
-			novo->destroy(novo);
+		case 1: list->bonus(list, new(Pbonus, 100, HUMANO), playerBonus);
 			break;
-		case 2: novo = new(Pbonus);
-			novo->set(novo, 30, OGRO);
-			list->bonus(list, novo, playerBonus);
-			novo->destroy(novo);
+		case 2: list->bonus(list, new(Pbonus, 30, OGRO), playerBonus);
 			break;
-		case 3: novo = new(Pbonus);
-			novo->set(novo, 50, ELFO);
-			list->bonus(list, novo, playerBonus);
-			novo->destroy(novo);
+		case 3: list->bonus(list, new(Pbonus, 50, ELFO), playerBonus);
 			break;
-		case 4:novo = new(Pbonus);
-			novo->set(novo, 70, GOBLIN);
-			list->bonus(list, novo, playerBonus);
-			novo->destroy(novo);
+		case 4: list->bonus(list, new(Pbonus, 80, GOBLIN), playerBonus);
 			break;
 		default: printf("Erro!\nTente Novamente...\n");
 	}	
