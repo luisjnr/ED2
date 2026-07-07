@@ -35,8 +35,8 @@ void setArma(Object self, int id, int dano, Equipamento equipamento){
 }
 
 void printArma(Object self, int position){
-	Arma arma = self->item;
 	if(self->type != 1) return;
+	Arma arma = self->item;
 	printf("====== Arma ======\n");
 	if(!arma->equipamento)
 		printf("Arco\n");
