@@ -1,47 +1,46 @@
-# 🌲 Data Structures II
+# Data Structures II
 
-Repository dedicated to my studies and practical activities in **Data Structures II**.
+Repository dedicated to the study and practice of **Data Structures II** using C.
 
-This repository contains exercises, assignments, and projects developed throughout the course, focusing on more advanced data structures and algorithms.
+It contains exercises, implementations, and projects developed throughout the course, with a focus on data structures and algorithms.
 
-## 📚 Topics
+## Content
 
-* Trees
-* Binary Search Trees
-* Graphs
-* Hash Tables
-* Advanced Searching
-* Advanced Sorting
-* Recursion
-* Algorithm Analysis
-* Data Structure Implementation
-* And other advanced concepts
+### Introductory exercises
 
-## 🛠️ Technologies
+Exercises focused on programming fundamentals and concepts used throughout the discipline.
 
-* C
-* Git
-* GitHub
+### Hash
 
-## 📂 Repository Structure
+Implementations and exercises related to hash tables and data organization.
 
-The repository will be organized into different activities and projects developed throughout the course.
+### Impressora
+
+A practical project developed to apply data structures and programming concepts in a simulated printer system.
+
+### Jogo
+
+A practical project developed to apply data structures and programming concepts through a game.
+
+## Technologies
+
+* **C**
+* **Git**
+* **GitHub**
+
+## Organization
 
 ```text
-📦 data-structures-2
- ┣ 📂 activities
- ┣ 📂 projects
- ┗ 📜 README.md
+data-structures-2/
+├── Hash/
+├── Impressora/
+├── Introductory exercises/
+├── Jogo/
+└── README.md
 ```
 
-## 🎯 Purpose
+## About
 
-The main goal of this repository is to **deepen my knowledge of data structures and algorithms through practical implementations and projects**.
+Academic repository developed during the **Data Structures II** course in the Information Systems degree.
 
-The repository will be continuously updated as new activities and projects are developed.
-
-## 🚧 Status
-
-🟢 **Completed**
-
-New activities and projects will be added throughout the course.
+**Language:** C
